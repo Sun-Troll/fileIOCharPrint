@@ -223,6 +223,7 @@ int main()
 			i = 0;
 			for (char c = in.get(); in.good(); c = in.get(), i++)
 			{
+				//data[i] = c; //if only this it still happens (unless I'm stupid)
 				if (i < 200)
 				{
 					data[i] = c;
@@ -244,11 +245,11 @@ int main()
 			}
 			else if (in.fail())
 			{
-				chili::print("\nSome failure?\n");
+				chili::print("\nSome failure?\n"); //why this and....
 			}
 			else if (in.eof())
 			{
-				chili::print("\nLoaded.\n");
+				chili::print("\nLoaded.\n"); //not this??
 			}
 			else
 			{
