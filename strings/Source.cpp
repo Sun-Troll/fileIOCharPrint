@@ -223,11 +223,11 @@ int main()
 			i = 0;
 			for (char c = in.get(); in.good(); c = in.get(), i++)
 			{
-				if (i < 2000)
+				if (i < 200)
 				{
 					data[i] = c;
 				}
-				else if (i == 2000)
+				else if (i == 200)
 				{
 					data[i] = 0;
 					break;
