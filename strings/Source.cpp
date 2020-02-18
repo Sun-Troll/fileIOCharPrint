@@ -136,16 +136,39 @@ int main()
 			}
 			break;
 		case 'p':
+		{
+			const int temp = i;
 			i = 0;
 			while (data[i] != 0)
 			{
-				chili::printContinue(&data[i]);
-				i += 17;
-				_putch('\t');
-				chili::printContinue(&data[i]);
-				i += 3;
-				_putch('\n');
+				if (data[i] != 3)
+				{
+					chili::printContinue(&data[i]);
+					i += 17;
+					_putch('\t|');
+					char n = chili::str2int(&data[i]);
+					if (n < 63)
+					{
+						while (n > 0)
+						{
+							_putch('=');
+							n--;
+						}
+					}
+					else
+					{
+						chili::print("OF THE CHARTS!!!!!!");
+					}
+					i += 3;
+					_putch('\n');
+				}
+				else
+				{
+					i += 20;
+				}
 			}
+			i = temp;
+		}
 			break;
 		case 's':
 			chili::print("save");
