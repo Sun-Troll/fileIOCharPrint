@@ -10,6 +10,20 @@ namespace chili
 			_putch( *s );
 		}
 	}
+	void printContinue(const char* s)
+	{
+		int n = 0;
+		for (; *s != 3; s++)
+		{
+			_putch(*s);
+			n++;
+		}
+		while (n < 16)
+		{
+			_putch(' ');
+			n++;
+		}
+	}
 
 	void read( char* buf,int maxSize )
 	{
@@ -20,6 +34,17 @@ namespace chili
 			*buf = c;
 		}
 		*buf = 0;
+	}
+
+	void readContinue(char* buf, int textEnd)
+	{
+		const char* const pEnd = buf + textEnd;
+		for (char c = _getch(); c != 13 && (buf + 1 < pEnd); c = _getch(), buf++)
+		{
+			_putch(c);
+			*buf = c;
+		}
+		*buf = 3;
 	}
 
 	int str2int( const char* s )
@@ -80,15 +105,47 @@ namespace chili
 
 int main()
 {
-	std::ifstream in( "boi.dat",std::ios::binary );
-	
-	int data;
-	in.read( reinterpret_cast<char*>(&data),sizeof( int ) );
-
-	char buffer[256];
-	chili::int2str( data,buffer,256 );
-	chili::print( buffer );
-
-	while( !_kbhit() );
+	char c = 0;
+	char data[201];
+	int i = 0;
+	for (char& c : data)
+	{
+		c = 3;
+	}
+	data[200] = 0;
+	while (c != 'q')
+	{
+		chili::print("l(oad) s(ave) a(dd) q(quit) or p(rint)\n");
+		c = _getch();
+		switch (c)
+		{
+		case 'a':
+			chili::print("nEnter name: ");
+			chili::readContinue(&data[i], 17);
+			i += 17;
+			chili::print("\nEnter value: ");
+			chili::readContinue(&data[i], 3);
+			i += 3;
+			_putch('\n');
+			break;
+		case 'p':
+			i = 0;
+			while (data[i] != 0)
+			{
+				chili::printContinue(&data[i]);
+				i += 17;
+				_putch('\t');
+				chili::printContinue(&data[i]);
+				i += 3;
+				_putch('\n');
+			}
+			break;
+		case 's':
+			chili::print("save");
+			break;
+		case 'l':
+			chili::print("load");
+		}
+	}
 	return 0;
 }
