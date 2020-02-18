@@ -139,6 +139,8 @@ int main()
 		{
 			const int temp = i;
 			i = 0;
+			chili::print("\n\tUgly Chart Pimps!");
+			chili::print("\n\t++++++++++++++++\n\n");
 			while (data[i] != 0)
 			{
 				if (data[i] != 3)
@@ -168,6 +170,7 @@ int main()
 				}
 			}
 			i = temp;
+			chili::print("\n\n");
 		}
 			break;
 		case 's':
