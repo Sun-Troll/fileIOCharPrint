@@ -197,16 +197,16 @@ int main()
 			char saveName[15];
 			chili::print("Write save file name: ");
 			chili::readSave(saveName, 15);
-			std::ofstream out("saveTest0.txt", std::ios::binary);
+			std::ofstream out(saveName, std::ios::binary);
 			for (char c : data)
 			{
-				if (c = 0)
+				if (c == 0)
 				{
 					break;
 				}
 				out.put(c);
 			}
-			_putch('\n');
+			chili::print("\nSaved.\n");
 		}
 			break;
 		case 'l':
