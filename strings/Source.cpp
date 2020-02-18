@@ -47,6 +47,25 @@ namespace chili
 		*buf = 3;
 	}
 
+	void readSave(char* buf, int textEnd)
+	{
+		const char* const pEnd = buf + textEnd;
+		for (char c = _getch(); c != 13 && (buf + 5 < pEnd); c = _getch(), buf++)
+		{
+			_putch(c);
+			*buf = c;
+		}
+		*buf = '.';
+		buf++;
+		*buf = 't';
+		buf++;
+		*buf = 'x';
+		buf++;
+		*buf = 't';
+		buf++;
+		*buf = 0;
+	}
+
 	int str2int( const char* s )
 	{
 		// scan to start point
@@ -174,7 +193,21 @@ int main()
 		}
 			break;
 		case 's':
-			chili::print("save");
+		{
+			char saveName[15];
+			chili::print("Write save file name: ");
+			chili::readSave(saveName, 15);
+			std::ofstream out("saveTest0.txt", std::ios::binary);
+			for (char c : data)
+			{
+				if (c = 0)
+				{
+					break;
+				}
+				out.put(c);
+			}
+			_putch('\n');
+		}
 			break;
 		case 'l':
 			chili::print("load");
