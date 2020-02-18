@@ -120,13 +120,20 @@ int main()
 		switch (c)
 		{
 		case 'a':
-			chili::print("nEnter name: ");
-			chili::readContinue(&data[i], 17);
-			i += 17;
-			chili::print("\nEnter value: ");
-			chili::readContinue(&data[i], 3);
-			i += 3;
-			_putch('\n');
+			if (i < 200)
+			{
+				chili::print("nEnter name: ");
+				chili::readContinue(&data[i], 17);
+				i += 17;
+				chili::print("\nEnter value: ");
+				chili::readContinue(&data[i], 3);
+				i += 3;
+				_putch('\n');
+			}
+			else
+			{
+				chili::print("List full!\n");
+			}
 			break;
 		case 'p':
 			i = 0;
