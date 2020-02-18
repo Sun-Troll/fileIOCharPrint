@@ -57,9 +57,9 @@ namespace chili
 		}
 		*buf = '.';
 		buf++;
-		*buf = 't';
+		*buf = 'd';
 		buf++;
-		*buf = 'x';
+		*buf = 'a';
 		buf++;
 		*buf = 't';
 		buf++;
@@ -210,7 +210,52 @@ int main()
 		}
 			break;
 		case 'l':
-			chili::print("load");
+		{
+			char loadName[15];
+			chili::print("Write load file name: ");
+			chili::readSave(loadName, 15);
+			std::ifstream in(loadName, std::ios::binary);
+			if (!in)
+			{
+				chili::print("\nFailed to load.\n");
+				break;
+			}
+			i = 0;
+			for (char c = in.get(); in.good(); c = in.get(), i++)
+			{
+				if (i < 2000)
+				{
+					data[i] = c;
+				}
+				else if (i == 2000)
+				{
+					data[i] = 0;
+					break;
+				}
+				else 
+				{
+					break;
+				}
+			}
+			i = 0;
+			if (in.bad())
+			{
+				chili::print("\nSomething fucked up!\n");
+			}
+			else if (in.fail())
+			{
+				chili::print("\nSome failure?\n");
+			}
+			else if (in.eof())
+			{
+				chili::print("\nLoaded.\n");
+			}
+			else
+			{
+				chili::print("\nWait Wut?!?\n");
+			}
+		}
+			break;
 		}
 	}
 	return 0;
